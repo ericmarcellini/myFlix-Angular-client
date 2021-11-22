@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs/internal/operators';
+import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -22,6 +22,12 @@ export class UserRegistrationService {
     );
   }
 
+  public userLogin(userCredentials: any): Observable<any> {
+     console.log(userCredentials);
+    return this.http.post(apiUrl + 'login', userCredentials).pipe(
+      catchError(this.handleError)
+    );
+  }
 private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
     console.error('Some error occurred:', error.error.message);
@@ -80,10 +86,10 @@ private handleError(error: HttpErrorResponse): any {
   }
 
   //Why does my Code Editor highlight this one as wrong?
-  public addFav(username: string, movieId: string): Observable<any>{
-    return this.http.post(apiUrl + 'users/' + username +'favorites' + movieId).pipe
-    (catchError(this.handleError))
-  }
+  // public addFav(username: string, movieId: string): Observable<any>{
+  //   return this.http.post(apiUrl + 'users/' + username +'favorites' + movieId).pipe
+  //   (catchError(this.handleError))
+  // }
 
   public removeFav(username: string, movieId: string): Observable<any>{
     return this.http.delete(apiUrl + 'users/' + username + 'favorites' + movieId).pipe(
