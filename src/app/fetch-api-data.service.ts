@@ -22,12 +22,13 @@ export class FetchDataApiService {
     );
   }
 
-  public userLogin(userCredentials: any): Observable<any> {
-     console.log(userCredentials);
-    return this.http.post(apiUrl + 'login', userCredentials).pipe(
+  public userLogin(userData: any): Observable<any> {
+     console.log(userData);
+    return this.http.post(apiUrl + 'login', userData).pipe(
       catchError(this.handleError)
     );
   }
+  
 private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
     console.error('Some error occurred:', error.error.message);
