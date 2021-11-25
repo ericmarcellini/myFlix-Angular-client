@@ -42,15 +42,29 @@ private handleError(error: HttpErrorResponse): any {
   }
 
   public getAllMovies(): Observable<any>{
-    return this.http.get(apiUrl + 'movies').pipe(
+    const token = localStorage.getItem('token');
+    const response = this.http.get(apiUrl + 'movies', {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer' + token,
+      }),
+    });
+    return response.pipe(
+      map(this.extractResponseData),
       catchError(this.handleError)
     )
   }
 
-  public getMovie(Title: string): Observable<any> {
-    return this.http.get(apiUrl + 'movies').pipe(
+  public getMovie(title: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const response = this.http.get(apiUrl + 'movies/' + title, {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + token,
+      }),
+    });
+    return response.pipe(
+      map(this.extractResponseData),
       catchError(this.handleError)
-    )
+    );
   }
 
   public getAllDirectors(): Observable<any> {
@@ -108,6 +122,11 @@ private handleError(error: HttpErrorResponse): any {
     return this.http.put(apiUrl + 'users/' + username, userData).pipe(
       catchError(this.handleError)
     )
+  }
+
+  private extractResponseData(res: any): any {
+    const body = res;
+    return body || {};
   }
 }
 
