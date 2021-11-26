@@ -3,6 +3,7 @@ import { LoginFormComponent } from '../login-form/login-form.component';
 import { UserRegistrationFormComponent } from '../user-registration-form/user-registration-form.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MovieCardComponent } from '../movie-card/movie-card.component';
+import { ProfilePageComponent } from '../profile-page/profile-page.component';
 
 @Component({
   selector: 'app-welcome-page',
@@ -26,6 +27,12 @@ export class WelcomePageComponent implements OnInit {
 
   openMovieDialog(): void {
     this.dialog.open(MovieCardComponent, {
+      width: '280px'
+    })
+  }
+
+  openProfileDialog(): void {
+    this.dialog.open(ProfilePageComponent, {
       width: '280px'
     })
   }

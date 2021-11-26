@@ -1,0 +1,25 @@
+<div>
+    <mat-card>
+      <mat-card-content class="card-content">
+        <p>Username: {{ user.Username }}</p>
+        <p>Email: {{ user.Email }}</p>
+        <p>Birth Date: {{ user.BirthDay | date: "MM/dd/yyyy":"UTC" }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          class="float-right"
+          mat-raised-button
+          color="primary"
+          (click)="openEditProfileDialog()"
+        >
+          Edit
+        </button>
+        <button 
+        class="float-right"
+        mat-raised-button
+        color="primary">
+          Delete
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
