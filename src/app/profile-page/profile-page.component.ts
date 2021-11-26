@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { FetchDataApiService } from '../fetch-api-data.service';
 import { EditProfileComponent } from '../edit-profile/edit-profile.component';
+import { DeleteProfileComponent } from '../delete-profile/delete-profile.component';
 
 @Component({
   selector: 'app-profile-page',
@@ -45,17 +46,19 @@ export class ProfilePageComponent implements OnInit {
     return this.favMovies;
   }
 
-  // deleteUser(): void {
-  //   this.dialog.open(ProfileDeleteComponent, {
-  //     width: '280px',
-  //   });
-  // }
+  openDeleteProfileDialog(): void {
+    this.dialog.open(DeleteProfileComponent, {
+      width: '280px',
+    });
+  }
 
   openEditProfileDialog(): void {
     this.dialog.open(EditProfileComponent, {
       width: '500px',
     });
   }
+
+
 
 
 }
