@@ -60,7 +60,7 @@ private handleError(error: HttpErrorResponse): any {
     const token = localStorage.getItem('token');
     const response = this.http.get(apiUrl + 'movies', {
       headers: new HttpHeaders({
-        Authorization: 'Bearer' + token,
+        Authorization: 'Bearer ' + token,
       }),
     });
     return response.pipe(
