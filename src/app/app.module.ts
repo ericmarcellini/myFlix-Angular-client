@@ -23,6 +23,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { DeleteProfileComponent } from './delete-profile/delete-profile.component';
 import { GenreCardComponent } from './genre-card/genre-card.component';
 import { DirectorCardComponent } from './director-card/director-card.component';
+import { NavbarCardComponent } from './navbar-card/navbar-card.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -41,7 +42,8 @@ const appRoutes: Routes = [
     EditProfileComponent,
     DeleteProfileComponent,
     GenreCardComponent,
-    DirectorCardComponent
+    DirectorCardComponent,
+    NavbarCardComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
