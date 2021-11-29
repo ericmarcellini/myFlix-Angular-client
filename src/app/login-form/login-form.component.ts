@@ -1,3 +1,6 @@
+/**
+ * LoginFormComponent is for users to log into the app
+ */
 import { Component,Input ,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog'
@@ -22,6 +25,10 @@ export class LoginFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * loginUser function logs in the user by sending a request to the backend with the userData (username & password).
+   * Then it redirects the user to the /movies tab
+   */
   loginUser(): void {
     this.fetchApiData.userLogin(this.userData).subscribe((result) => {
       this.dialogRef.close();

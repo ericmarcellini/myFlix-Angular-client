@@ -1,3 +1,6 @@
+/**
+ * MovieCardComponent displays the movie card UI, movie title, image, director, genre and synopsis, as well as the buttons
+ */
 import { Component, OnInit } from '@angular/core';
 import { FetchDataApiService } from '../fetch-api-data.service';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,6 +19,12 @@ export class MovieCardComponent implements OnInit {
   movies: any[] = [];
   favMovies: any[] = [];
 
+  /**
+   * The following items are documented as properties
+   * @param fetchApiData 
+   * @param dialog 
+   * @param snackBar 
+   */
   constructor(
     public fetchApiData: FetchDataApiService,
     public dialog: MatDialog,
@@ -26,6 +35,9 @@ ngOnInit(): void {
   this.getMovies();
 }
 
+  /**
+  * gets movies
+  */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
         this.movies = resp;
@@ -35,7 +47,12 @@ ngOnInit(): void {
     }
 
 
-
+  /**
+   * Opens dialog with director information
+   * @param Name 
+   * @param Bio 
+   * @param birthDate 
+   */
   openDirectorDialog(
     Name: string,
     Bio: string,
@@ -51,6 +68,11 @@ ngOnInit(): void {
     })
   }  
 
+  /**
+   * Opens dialog with genre information
+   * @param name 
+   * @param description 
+   */
   openGenreDialog(
     name: string,
     description: string,

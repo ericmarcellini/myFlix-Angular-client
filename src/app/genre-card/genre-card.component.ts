@@ -1,3 +1,6 @@
+/**
+ * GenreCardComponent displays the genre card in the movies section
+ */
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -7,6 +10,10 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./genre-card.component.scss']
 })
 export class GenreCardComponent implements OnInit {
+  /**
+   * name & description are set as properties
+   * @param data 
+   */
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {

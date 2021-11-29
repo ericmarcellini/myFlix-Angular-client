@@ -1,3 +1,7 @@
+/**
+ * WelcomePageComponent is the component that loads out when the user is either not registered or not logged in.
+ * It has two buttons that allow you to either make a new account or log-into an existing one. 
+ */
 import { Component, OnInit } from '@angular/core';
 import { LoginFormComponent } from '../login-form/login-form.component';
 import { UserRegistrationFormComponent } from '../user-registration-form/user-registration-form.component';
@@ -25,15 +29,4 @@ export class WelcomePageComponent implements OnInit {
     });
   }
 
-  openMovieDialog(): void {
-    this.dialog.open(MovieCardComponent, {
-      width: '280px'
-    })
-  }
-
-  openProfileDialog(): void {
-    this.dialog.open(ProfilePageComponent, {
-      width: '280px'
-    })
-  }
 }

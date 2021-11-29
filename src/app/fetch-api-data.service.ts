@@ -20,7 +20,9 @@ export class FetchDataApiService {
  // This will provide HttpClient to the entire class, making it available via this.http
   constructor(private http: HttpClient) {
   }
- // Making the api call for the user registration endpoint
+ /**
+  * Making the api call for the user registration endpoint 
+  * */ 
   public userRegistration(userData: any): Observable<any> {
     console.log(userData);
     return this.http.post(apiUrl + 'users', userData).pipe(
@@ -28,6 +30,11 @@ export class FetchDataApiService {
     );
   }
 
+  /**
+   * post request that calls the /login endpoint
+   * @param userData is the information being sent to the backend
+   * @returns tokens
+   */
   public userLogin(userData: any): Observable<any> {
     const token = localStorage.getItem('token');
     const { Username, Password } = userData
@@ -56,6 +63,10 @@ private handleError(error: HttpErrorResponse): any {
     'Something bad happened; please try again later.');
   }
 
+  /**
+   * Calls the /movies endpoint
+   * @returns a list of all the movies available
+   */
   public getAllMovies(): Observable<any>{
     const token = localStorage.getItem('token');
     const response = this.http.get(apiUrl + 'movies', {
@@ -69,6 +80,12 @@ private handleError(error: HttpErrorResponse): any {
     )
   }
 
+  /**
+   * get request to the /movies endpoint + @param
+   * this is to get a specific movie
+   * @param title movie title
+   * @returns specific movie listed
+   */
   public getMovie(title: string): Observable<any> {
     const token = localStorage.getItem('token');
     const response = this.http.get(apiUrl + 'movies/' + title, {
@@ -82,6 +99,12 @@ private handleError(error: HttpErrorResponse): any {
     );
   }
 
+  /**
+   * get request to the /genres endpoint + @param
+   * this is to get a specific genre
+   * @param name which is the name of the genre
+   * @returns specific genre 
+   */
   public getGenre(name: string): Observable<any> {
     const token = localStorage.getItem('token');
     const response = this.http.get(apiUrl + 'genres/' + name, {
@@ -95,6 +118,11 @@ private handleError(error: HttpErrorResponse): any {
     );
   }
 
+  /**
+   * get request that gets a specifics users information
+   * @param username 
+   * @returns a specific users information
+   */
   public getUser(username: string): Observable<any> {
     const token = localStorage.getItem('token');
     const response = this.http.get(apiUrl + 'users/' + username, {
@@ -107,7 +135,12 @@ private handleError(error: HttpErrorResponse): any {
       catchError(this.handleError)
     );
   }
-
+  /**
+   * get request to the /users endpoint.
+   * adds '/favorites' to the end of the url to display a users favorite movie list
+   * @param username 
+   * @returns 
+   */
   public getFavMovies(username: string): Observable<any> {
     const token = localStorage.getItem('token');
     const response = this.http.get(apiUrl + 'users/' + username + '/favorites',
@@ -123,6 +156,12 @@ private handleError(error: HttpErrorResponse): any {
     );
   }
 
+  /**
+   * put request. /users endpoint + "username" + /favorites "movieID"
+   * @param username Username of the person adding the movie to favorites
+   * @param movieId ID of the movie we're adding to favorites
+   * @returns 
+   */
   public addFav(username: string, movieId: string): Observable<any> {
     const token = localStorage.getItem('token');
     const response = this.http.post(apiUrl + 'users/' + username + '/favorites/' + movieId,
@@ -138,6 +177,12 @@ private handleError(error: HttpErrorResponse): any {
     return response;
   }
 
+  /**
+   * delete request. /users endpoint + "username" + /favorites "movieID"
+   * @param username Username of the person removing the movie to favorites
+   * @param movieId ID of the movie we're removing to favorites
+   * @returns 
+   */
   public removeFav(username: string, movieId: string): Observable<any> {
     const token = localStorage.getItem('token');
     const response = this.http.delete(apiUrl + 'users/' + username + '/favorites/' + movieId,{
@@ -153,6 +198,12 @@ private handleError(error: HttpErrorResponse): any {
     );
   }
   
+  /**
+   * Delete request to the /users endpoint + "username" + /deregister. 
+   * This function deletes your account
+   * @param username this refers to the account we wish to delete
+   * @returns 
+   */
   public deleteUser(username: string): Observable<any> {
     const token = localStorage.getItem('token');
     const response = this.http.delete(apiUrl + 'users/' + username + '/deregister',{
@@ -164,6 +215,13 @@ private handleError(error: HttpErrorResponse): any {
     return response.pipe(catchError(this.handleError));
   }
 
+  /**
+   * PUT request to /users endpoint + "username"
+   * this function updates your user data like username, password & email
+   * @param username username we wish to update/edit
+   * @param updatedInfo Updated user information that we're going to update
+   * @returns 
+   */
   public updateUser(username: string, updatedInfo: object): Observable<any> {
     const token = localStorage.getItem('token');
     const response = this.http.put(apiUrl + 'users/' + username, updatedInfo, {

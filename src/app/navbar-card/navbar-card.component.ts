@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+/**
+ * NavbarCardComponent allows us to display a navbar
+ */
 
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-navbar-card',

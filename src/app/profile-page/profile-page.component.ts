@@ -1,3 +1,6 @@
+/**
+ * ProfilePageComponent allows user to access their profile, check their information as well as favorite movies
+ */
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
@@ -14,6 +17,13 @@ import { DeleteProfileComponent } from '../delete-profile/delete-profile.compone
 export class ProfilePageComponent implements OnInit {
   user: any = {};
   favMovies: any = {};
+  /**
+   * The following items are documented as properties
+   * @param fetchDataApi 
+   * @param snackBar 
+   * @param dialog 
+   * @param router 
+   */
   constructor(
     public fetchDataApi: FetchDataApiService,
     public snackBar: MatSnackBar,
@@ -25,6 +35,9 @@ export class ProfilePageComponent implements OnInit {
     this.getUserInfo();
   }
 
+  /**
+   * Retrieves users information from the backend
+   */
   getUserInfo(): void {
     let user = JSON.parse(localStorage.getItem('user') || '');
     this.fetchDataApi.getUser(user.Username).subscribe((res: any) => {
@@ -32,7 +45,10 @@ export class ProfilePageComponent implements OnInit {
     });
   }
 
-  
+  /**
+   * gets your list of favorite movies from the backend
+   * @returns users favMovies list
+   */
   getFavMovies(): void {
     let movies: any[] = [];
     this.fetchDataApi.getAllMovies().subscribe((res: any) => {
@@ -46,12 +62,18 @@ export class ProfilePageComponent implements OnInit {
     return this.favMovies;
   }
 
+  /**
+   * Opens the DeleteProfileComponent which is used to delete your profile from the apps backend
+   */
   openDeleteProfileDialog(): void {
     this.dialog.open(DeleteProfileComponent, {
       width: '280px',
     });
   }
 
+  /**
+   * Opens the EditProfileComponent which is used to update your profile
+   */
   openEditProfileDialog(): void {
     this.dialog.open(EditProfileComponent, {
       width: '500px',
