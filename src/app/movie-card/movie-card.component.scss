@@ -1,10 +1,41 @@
 .movie-card-wrapper {
     display: flex;
+    background-color: black;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     padding: 50px 25px;
     @media screen and (max-width: 500px) {
       padding: 0;
+    }
+  }
+
+  .mat-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 3px;
+    position: relative;
+    padding: 30px;
+    border-radius: 3%;
+    background-color: #303030;
+    max-width: 300px;
+    width: 300px;
+    img {
+      border-radius: 4%;
+      max-width: 250px;
+    }
+    .mat-card-header {
+      text-align: center;
+    }
+    .mat-card-title  {
+      font-weight: bold;
+      color: cyan;
+    }
+
+    .mat-card-subtitle{
+      font-weight: bold;
+      color: white;
     }
   }

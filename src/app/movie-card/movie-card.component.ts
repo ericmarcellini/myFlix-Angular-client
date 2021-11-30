@@ -15,7 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./movie-card.component.scss']
 })
 export class MovieCardComponent implements OnInit {
-  user: any = JSON.parse(localStorage.getItem('user') || '');
+  //user: any = JSON.parse(localStorage.getItem('user') || '');
   movies: any[] = [];
   favMovies: any[] = [];
 
