@@ -1,10 +1,15 @@
+<app-navbar-card></app-navbar-card>
 <div>
     <mat-card>
-      <mat-card-content class="card-content">
-        <p>Username: {{ user.Username }}</p>
-        <p>Email: {{ user.Email }}</p>
-        <p>Birth Date: {{ user.BirthDay | date: "MM/dd/yyyy":"UTC" }}</p>
-      </mat-card-content>
+      <form>
+        <mat-form-field appearance="legacy">
+          <input disabled matInput [(ngModel)]="user.Username" type="username" placeholder="Username"
+            name="Username">
+        </mat-form-field>
+        <mat-form-field appearance="legacy">
+          <input disabled matInput [(ngModel)]="user.Email" type="email" placeholder="e-mail" name="Email">
+        </mat-form-field>
+      </form>
       <mat-card-actions>
         <button
           class="float-right"

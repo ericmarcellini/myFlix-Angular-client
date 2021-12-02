@@ -5,7 +5,6 @@ import { Component, Inject, OnInit, Input } from '@angular/core';
 import { FetchDataApiService } from '../fetch-api-data.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit-profile',
@@ -16,16 +15,16 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export class EditProfileComponent implements OnInit {
   // loads user data from local storage
-  user: any = JSON.parse(localStorage.getItem('user') || '');
+  user: any = {}; //JSON.parse(localStorage.getItem('user') || '');
 
   /**
    * connects the form values with the userData
    */
   @Input() userData = {
-    Username: this.user.Username,
+    Username: '',
     Password: '',
-    Email: this.user.Email,
-    BirthDate: this.user.BirthDate,
+    Email: '',
+    BirthDay: '',
   };
   /**
    * all items are set as properties
@@ -36,8 +35,6 @@ export class EditProfileComponent implements OnInit {
    */
 
   constructor(
-    @Inject(MAT_DIALOG_DATA)
-    public data: { onSuccess: () => void },
     public fetchApiData: FetchDataApiService,
     public dialogRef: MatDialogRef<EditProfileComponent>,
     public snackBar: MatSnackBar
@@ -50,7 +47,7 @@ export class EditProfileComponent implements OnInit {
    * this is the updateUser function, it updates the users data and sends it to the backend MOVIEAPI
    */
   updateUser(): void {
-    this.fetchApiData.updateUser(this.user.Username, this.userData).subscribe((res) =>{
+    this.fetchApiData.updateUser(this.userData).subscribe((res) =>{
       this.dialogRef.close();
       localStorage.setItem('user', JSON.stringify(res));
       this.snackBar.open('Profile updated!','Nice ', {
@@ -58,7 +55,7 @@ export class EditProfileComponent implements OnInit {
       })
       setTimeout(()=> {
         window.location.reload();
-      })
+      }, 2000);
     })
   }
 }

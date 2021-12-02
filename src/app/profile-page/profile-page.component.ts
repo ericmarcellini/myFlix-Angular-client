@@ -17,7 +17,9 @@ import { DeleteProfileComponent } from '../delete-profile/delete-profile.compone
 })
 export class ProfilePageComponent implements OnInit {
   user: any = {};
-  favMovies: any = {};
+  movies: any[] = [];
+  favMovies: any[] = [];
+
   /**
    * The following items are documented as properties
    * @param fetchDataApi 
@@ -34,15 +36,17 @@ export class ProfilePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserInfo();
+    this.getFavMovies();
   }
 
   /**
    * Retrieves users information from the backend
    */
   getUserInfo(): void {
-    let user = JSON.parse(localStorage.getItem('user') || '');
-    this.fetchDataApi.getUser(user.Username).subscribe((res: any) => {
+    let myUser = localStorage.getItem('user')
+    this.fetchDataApi.getUser(myUser).subscribe((res: any) => {
       this.user = res
+      this.getFavMovies();
     });
   }
 
@@ -50,17 +54,11 @@ export class ProfilePageComponent implements OnInit {
    * gets your list of favorite movies from the backend
    * @returns users favMovies list
    */
-  getFavMovies(): void {
-    let movies: any[] = [];
-    this.fetchDataApi.getAllMovies().subscribe((res: any) => {
-      movies = res;
-      movies.forEach((movie: any) => {
-        if (this.user.FavoriteMovies.includes(movie._id)) {
-          this.favMovies.push(movie);
-        }
-      });
+   getFavMovies(): void {
+    this.fetchDataApi.getUser(localStorage.getItem('user')).subscribe((resp: any) => {
+      this.favMovies = resp.favMovies;
+      return this.favMovies;
     });
-    return this.favMovies;
   }
 
   /**

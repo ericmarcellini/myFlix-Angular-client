@@ -135,13 +135,13 @@ ngOnInit(): void {
   }
 
 
-  setFavStatus(id: any): any {
-    if (this.favMovies.includes(id)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  // setFavStatus(id: any): any {
+  //   if (this.favMovies.includes(id)) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 ////////////////////////////
 }
 

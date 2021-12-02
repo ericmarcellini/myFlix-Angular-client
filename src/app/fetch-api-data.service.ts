@@ -7,10 +7,6 @@ import { map } from 'rxjs/operators';
 //Declaring the api url that will provide data for the client app
 const apiUrl = 'https://myflixdb1112.herokuapp.com/';
 const token = localStorage.getItem('token');
-const headers ={
-    headers: new HttpHeaders({
-      Authorization: 'Bearer' + token,
-})};
 const user = localStorage.getItem('user');
 
 @Injectable({
@@ -198,14 +194,16 @@ private handleError(error: HttpErrorResponse): any {
    * @returns 
    */
   public deleteUser(username: string): Observable<any> {
-    const token = localStorage.getItem('token');
-    const response = this.http.delete(apiUrl + 'users/' + username + '/deregister',{
-        headers: new HttpHeaders({
+    return this.http.delete(apiUrl + `users/${user}`, {
+      headers: new HttpHeaders(
+        {
           Authorization: 'Bearer ' + token,
-        }),
-      }
-    );
-    return response.pipe(catchError(this.handleError));
+        }
+      )
+    }).pipe(
+      map(this.extractResponseData),
+      catchError(this.handleError)
+    )
   }
 
   /**
@@ -215,14 +213,13 @@ private handleError(error: HttpErrorResponse): any {
    * @param updatedInfo Updated user information that we're going to update
    * @returns 
    */
-  public updateUser(username: string, updatedInfo: object): Observable<any> {
-    const token = localStorage.getItem('token');
-    const response = this.http.put(apiUrl + 'users/' + username, updatedInfo, {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + token,
-      }),
-    });
-    return response.pipe(
+  updateUser(userData: any): Observable<any> {
+    return this.http.put(apiUrl + `users/${user}`, user, {
+      headers: new HttpHeaders(
+        {
+          Authorization: 'Bearer ' + token,
+        })
+    }).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     );
