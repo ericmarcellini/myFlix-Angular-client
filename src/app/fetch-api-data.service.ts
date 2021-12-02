@@ -176,7 +176,7 @@ private handleError(error: HttpErrorResponse): any {
    * @returns 
    */
    removeFav(id: string): Observable<any> {
-    return this.http.delete(apiUrl + `users/${user}/removeFromFav/${id}`, {
+    return this.http.delete(apiUrl + `users/${user}/movies/${id}`, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
