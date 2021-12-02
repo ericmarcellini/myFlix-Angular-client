@@ -10,11 +10,9 @@ export class DirectorCardComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    public Director: {
-      name: string;
-      bio: string;
-      birthDate: any;
-      deathDate: any;
+    public data: {
+      Name: string;
+      Bio: string;
     }
   ) {}
 

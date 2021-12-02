@@ -9,6 +9,7 @@ import { FetchDataApiService } from '../fetch-api-data.service';
 import { EditProfileComponent } from '../edit-profile/edit-profile.component';
 import { DeleteProfileComponent } from '../delete-profile/delete-profile.component';
 
+
 @Component({
   selector: 'app-profile-page',
   templateUrl: './profile-page.component.html',
@@ -80,7 +81,24 @@ export class ProfilePageComponent implements OnInit {
     });
   }
 
+  addFav(id: string, Title: string): void {
+    this.fetchDataApi.addFav(id).subscribe((res: any) => {
+      this.snackBar.open('Movie has been added to favorites', 'Nice', {
+        duration: 2000,
+      });
+      return this.getFavMovies();
+    });
+  }
 
+  removeFav(id: string, Title: string): void {
+    this.fetchDataApi.removeFav(id).subscribe((res: any) => {
+      this.snackBar.open('Movie has been removed from favorites`', 'Nice', {
+        duration: 2000,
+      });
+      window.location.reload();
+      return this.getFavMovies();
+    });
+  }
 
 
 }

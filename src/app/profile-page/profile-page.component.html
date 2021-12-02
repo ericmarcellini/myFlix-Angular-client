@@ -23,5 +23,14 @@
           Delete
         </button>
       </mat-card-actions>
+      
+    <h1 class="favoriteTitle">Favorite Movies</h1>
+    <div class="favoriteMovies">
+      <div class="movie-container" *ngFor="let fav of favMovies">
+        <h2>{{fav.Title}}</h2>
+        <img src={{fav.ImgPath}} />
+        <button mat-raised-button color="warn" (click)="removeFav(fav._id, fav.Title)">Remove</button>
+      </div>
+    </div>
     </mat-card>
   </div>

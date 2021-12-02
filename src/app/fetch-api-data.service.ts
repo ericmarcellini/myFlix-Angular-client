@@ -11,6 +11,7 @@ const headers ={
     headers: new HttpHeaders({
       Authorization: 'Bearer' + token,
 })};
+const user = localStorage.getItem('user');
 
 @Injectable({
   providedIn: 'root'
@@ -123,7 +124,7 @@ private handleError(error: HttpErrorResponse): any {
    * @param username 
    * @returns a specific users information
    */
-  public getUser(username: string): Observable<any> {
+  public getUser(username: any): Observable<any> {
     const token = localStorage.getItem('token');
     const response = this.http.get(apiUrl + 'users/' + username, {
       headers: new HttpHeaders({
@@ -141,20 +142,18 @@ private handleError(error: HttpErrorResponse): any {
    * @param username 
    * @returns 
    */
-  public getFavMovies(username: string): Observable<any> {
-    const token = localStorage.getItem('token');
-    const response = this.http.get(apiUrl + 'users/' + username + '/favorites',
-      {
-        headers: new HttpHeaders({
+  public getFavMovies(): Observable<any> {
+    return this.http.get(apiUrl + `users/${user}/movies`, {
+      headers: new HttpHeaders(
+        {
           Authorization: 'Bearer ' + token,
-        }),
-      }
-    );
-    return response.pipe(
+        })
+    }).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     );
   }
+
 
   /**
    * put request. /users endpoint + "username" + /favorites "movieID"
@@ -162,19 +161,16 @@ private handleError(error: HttpErrorResponse): any {
    * @param movieId ID of the movie we're adding to favorites
    * @returns 
    */
-  public addFav(username: string, movieId: string): Observable<any> {
-    const token = localStorage.getItem('token');
-    const response = this.http.post(apiUrl + 'users/' + username + '/favorites/' + movieId,
-        {},{
-          headers: new HttpHeaders({
-            Authorization: 'Bearer ' + token,
-          }),
-          responseType: 'text',
-        }
-      )
-      .pipe(map(this.extractResponseData), catchError(this.handleError));
-
-    return response;
+  public addFav(id: string): Observable<any> {
+    return this.http.post(apiUrl + `users/${user}/movies/${id}`, id, {
+      headers: new HttpHeaders(
+        {
+          Authorization: 'Bearer ' + token,
+        })
+    }).pipe(
+      map(this.extractResponseData),
+      catchError(this.handleError)
+    );
   }
 
   /**
@@ -183,16 +179,13 @@ private handleError(error: HttpErrorResponse): any {
    * @param movieId ID of the movie we're removing to favorites
    * @returns 
    */
-  public removeFav(username: string, movieId: string): Observable<any> {
-    const token = localStorage.getItem('token');
-    const response = this.http.delete(apiUrl + 'users/' + username + '/favorites/' + movieId,{
-        headers: new HttpHeaders({
+   removeFav(id: string): Observable<any> {
+    return this.http.delete(apiUrl + `users/${user}/removeFromFav/${id}`, {
+      headers: new HttpHeaders(
+        {
           Authorization: 'Bearer ' + token,
-        }),
-        responseType: 'text',
-      }
-    );
-    return response.pipe(
+        })
+    }).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     );

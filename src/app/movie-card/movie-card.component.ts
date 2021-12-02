@@ -8,6 +8,8 @@ import { DirectorCardComponent } from '../director-card/director-card.component'
 import { GenreCardComponent } from '../genre-card/genre-card.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DescriptionCardComponent } from '../description-card/description-card.component';
+import { NavbarCardComponent } from '../navbar-card/navbar-card.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -15,7 +17,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./movie-card.component.scss']
 })
 export class MovieCardComponent implements OnInit {
-  //user: any = JSON.parse(localStorage.getItem('user') || '');
   movies: any[] = [];
   favMovies: any[] = [];
 
@@ -29,6 +30,7 @@ export class MovieCardComponent implements OnInit {
     public fetchApiData: FetchDataApiService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
+
     ) { }
 
 ngOnInit(): void {
@@ -56,13 +58,11 @@ ngOnInit(): void {
   openDirectorDialog(
     Name: string,
     Bio: string,
-    birthDate: any,
   ): void {
     this.dialog.open(DirectorCardComponent, {
       data: {
         Name,
-        Bio,
-        birthDate
+        Bio
       },
       width: '280px'
     })
@@ -75,15 +75,74 @@ ngOnInit(): void {
    */
   openGenreDialog(
     name: string,
-    description: string,
+    description: string
   ): void {
     this.dialog.open(GenreCardComponent, {
       data: {
         name, 
-        description,
+        description
       },
       width: '280px'
     })
   }
 
+  /**
+   * opens dialog with synopsis information
+   * @param title is the movie title
+   * @param description is the description of such movie
+   * @param releaseDate is the release date of such movie
+   */
+  openSynopsisDialog(
+    title: string,
+    description: string,
+    releaseDate: any,
+  ): void {
+    this.dialog.open(DescriptionCardComponent,{
+      data: {
+        title,
+        description,
+        releaseDate,
+      },
+      width:'280px'
+    })
+  }
+
+  getFavMovies(): void {
+    const user = localStorage.getItem('user');
+    this.fetchApiData.getUser(user).subscribe((res: any) => {
+      this.favMovies = res.FavoriteMovies;
+      return this.favMovies;
+    });
+  }
+
+  addFav(id: string, Title: string): void {
+    this.fetchApiData.addFav(id).subscribe((res: any) => {
+      this.snackBar.open('Movie has been added to favorites', 'Nice', {
+        duration: 2000,
+      });
+      return this.getFavMovies();
+    });
+  }
+
+  removeFav(id: string, Title: string): void {
+    this.fetchApiData.removeFav(id).subscribe((res: any) => {
+      this.snackBar.open('Movie has been removed from favorites`', 'Nice', {
+        duration: 2000,
+      });
+      window.location.reload();
+      return this.getFavMovies();
+    });
+  }
+
+
+  setFavStatus(id: any): any {
+    if (this.favMovies.includes(id)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+////////////////////////////
 }
+
+
