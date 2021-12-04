@@ -43,7 +43,7 @@ export class ProfilePageComponent implements OnInit {
    * Retrieves users information from the backend
    */
   getUserInfo(): void {
-    let myUser = localStorage.getItem('user')
+    let myUser = localStorage.getItem('Username')
     this.fetchDataApi.getUser(myUser).subscribe((res: any) => {
       this.user = res
       this.getFavMovies();
