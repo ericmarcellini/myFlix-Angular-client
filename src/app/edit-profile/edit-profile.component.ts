@@ -43,6 +43,7 @@ export class EditProfileComponent implements OnInit {
   // dont delete
   ngOnInit(): void {
   }
+  
   /**
    * this is the updateUser function, it updates the users data and sends it to the backend MOVIEAPI
    */

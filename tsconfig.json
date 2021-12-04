@@ -21,7 +21,19 @@
     "lib": [
       "es2020",
       "dom"
-    ]
+    ],
+    // "typedocOptions": {
+      // "entryPoints": 
+      // [
+      //   "src/app/fetch-api-data.service.ts",
+      //   "src/app/edit-profile/edit-profile.component.ts",
+      //   "src/app/login-form/login-form.component.ts",
+      //   "src/app/movie-card/movie-card.component.ts",
+      //   "src/app/profile-page/profile-page.component.ts",
+      //   "src/app/user-registration-form.component.ts",
+      // ],
+      // "out": "doc"
+    // }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
