@@ -49,7 +49,7 @@ export class EditProfileComponent implements OnInit {
   updateUser(): void {
     this.fetchApiData.updateUser(this.userData).subscribe((res) =>{
       this.dialogRef.close();
-      localStorage.setItem('user', JSON.stringify(res));
+      localStorage.setItem('Username', JSON.stringify(res));
       this.snackBar.open('Profile updated!','Nice ', {
         duration: 2000,
       })

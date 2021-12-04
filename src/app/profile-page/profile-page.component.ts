@@ -55,7 +55,7 @@ export class ProfilePageComponent implements OnInit {
    * @returns users favMovies list
    */
    getFavMovies(): void {
-    this.fetchDataApi.getUser(localStorage.getItem('user')).subscribe((resp: any) => {
+    this.fetchDataApi.getUser(localStorage.getItem('Username')).subscribe((resp: any) => {
       this.favMovies = resp.favMovies;
       return this.favMovies;
     });
