@@ -31,4 +31,17 @@ export class NavbarCardComponent {
     public snackBar: MatSnackBar
   ) {}
 
+  movies(): void {
+    this.router.navigate(['/movies'])
+  }
+
+  profile(): void {
+    this.router.navigate(['/profile'])
+  }
+
+  logOut(): void {
+    localStorage.removeItem('Username');
+    localStorage.removeItem('token');
+    this.router.navigate(['/welcome'])
+  }
 }

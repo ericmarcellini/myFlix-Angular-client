@@ -15,7 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 export class EditProfileComponent implements OnInit {
   // loads user data from local storage
-  user: any = {}; //JSON.parse(localStorage.getItem('user') || '');
+  user: any = {}//JSON.parse(localStorage.getItem('Username') || '');
 
   /**
    * connects the form values with the userData

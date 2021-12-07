@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 //Declaring the api url that will provide data for the client app
 const apiUrl = 'https://myflixdb1112.herokuapp.com/';
 const token = localStorage.getItem('token');
-const user = localStorage.getItem('user');
+const user = localStorage.getItem('Username');
 
 @Injectable({
   providedIn: 'root'
@@ -193,7 +193,7 @@ private handleError(error: HttpErrorResponse): any {
    * @param username this refers to the account we wish to delete
    * @returns 
    */
-  public deleteUser(username: string): Observable<any> {
+  public deleteUser(Username: string): Observable<any> {
     return this.http.delete(apiUrl + `users/${user}`, {
       headers: new HttpHeaders(
         {
@@ -214,7 +214,7 @@ private handleError(error: HttpErrorResponse): any {
    * @returns 
    */
   updateUser(userData: any): Observable<any> {
-    return this.http.put(apiUrl + `users/${user}`, user, {
+    return this.http.put(apiUrl + `users/${user}`, userData, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,

@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./delete-profile.component.scss']
 })
 export class DeleteProfileComponent implements OnInit {
-user: any = localStorage.getItem('user')
+user: any = localStorage.getItem('Username')
   constructor(
     public fetchDataApi: FetchDataApiService,
     public snackBar: MatSnackBar,
