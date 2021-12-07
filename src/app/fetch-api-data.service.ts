@@ -193,8 +193,8 @@ private handleError(error: HttpErrorResponse): any {
    * @param username this refers to the account we wish to delete
    * @returns 
    */
-  deleteUser(): Observable<any> {
-    return this.http.delete(apiUrl + `users/${user}`, {
+  deleteUser( username: any): Observable<any> {
+    return this.http.delete(apiUrl + `users/` + username , {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
@@ -213,8 +213,8 @@ private handleError(error: HttpErrorResponse): any {
    * @param updatedInfo Updated user information that we're going to update
    * @returns 
    */
-  updateUser(Username: string, userData: any): Observable<any> {
-    return this.http.put(apiUrl + `users/`+ Username, userData, {
+  updateUser(Username: any, userData: any): Observable<any> {
+    return this.http.put(apiUrl + `users/`+ userData.Username, userData, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
