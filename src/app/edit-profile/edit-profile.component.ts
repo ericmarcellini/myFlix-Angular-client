@@ -24,7 +24,7 @@ export class EditProfileComponent implements OnInit {
     Username: '',
     Password: '',
     Email: '',
-    BirthDay: '',
+    Birthday: '',
   };
   /**
    * all items are set as properties
