@@ -48,7 +48,7 @@ export class EditProfileComponent implements OnInit {
    * this is the updateUser function, it updates the users data and sends it to the backend MOVIEAPI
    */
   updateUser(): void {
-    this.fetchApiData.updateUser(this.userData).subscribe((res) =>{
+    this.fetchApiData.updateUser(this.userData.Username, this.userData).subscribe((res) =>{
       this.dialogRef.close();
       localStorage.setItem('Username', JSON.stringify(res));
       this.snackBar.open('Profile updated!','Nice ', {

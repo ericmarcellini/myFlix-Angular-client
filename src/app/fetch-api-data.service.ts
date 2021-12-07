@@ -213,8 +213,8 @@ private handleError(error: HttpErrorResponse): any {
    * @param updatedInfo Updated user information that we're going to update
    * @returns 
    */
-  updateUser(userData: any): Observable<any> {
-    return this.http.put(apiUrl + `users/${user}`, userData, {
+  updateUser(Username: string, userData: any): Observable<any> {
+    return this.http.put(apiUrl + `users/`+ Username, userData, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
