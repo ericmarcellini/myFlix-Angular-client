@@ -210,7 +210,7 @@ private handleError(error: HttpErrorResponse): any {
    * PUT request to /users endpoint + "username"
    * this function updates your user data like username, password & email
    * @param username username we wish to update/edit
-   * @param updatedInfo Updated user information that we're going to update
+   * @param userData Updated user information that we're going to update
    * @returns 
    */
   updateUser(Username: any, userData: any): Observable<any> {
