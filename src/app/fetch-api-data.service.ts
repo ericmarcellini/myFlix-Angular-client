@@ -139,7 +139,7 @@ private handleError(error: HttpErrorResponse): any {
    * @returns 
    */
   public getFavMovies(): Observable<any> {
-    return this.http.get(apiUrl + `users/${user}/movies`, {
+    return this.http.get(apiUrl + `users/${user}/`, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
@@ -195,7 +195,7 @@ private handleError(error: HttpErrorResponse): any {
    */
   deleteUser(): Observable<any> {
     const token = localStorage.getItem('token');
-    const response = this.http.delete(apiUrl + `users/${user}`, {
+    const response = this.http.delete(apiUrl + `users/${user}` , {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,

@@ -108,6 +108,7 @@ ngOnInit(): void {
   }
 
   getFavMovies(): void {
+    const token = localStorage.getItem('token')
     const user = localStorage.getItem('Username');
     this.fetchApiData.getUser(user).subscribe((res: any) => {
       this.favMovies = res.favMovies;
@@ -135,13 +136,6 @@ ngOnInit(): void {
   }
 
 
-  setFavStatus(id: any): any {
-    if (this.favMovies.includes(id)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 ////////////////////////////
 }
 

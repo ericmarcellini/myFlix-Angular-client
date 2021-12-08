@@ -18,7 +18,7 @@ import { DeleteProfileComponent } from '../delete-profile/delete-profile.compone
 export class ProfilePageComponent implements OnInit {
   user: any = {};
   movies: any[] = [];
-  favMovies: any[] = [];
+  favMovies: any = [];
 
   /**
    * The following items are documented as properties
@@ -36,29 +36,41 @@ export class ProfilePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserInfo();
-    this.getFavMovies();
   }
 
   /**
    * Retrieves users information from the backend
    */
   getUserInfo(): void {
-    let myUser = localStorage.getItem('Username')
-    this.fetchDataApi.getUser(myUser).subscribe((res: any) => {
+    let user = localStorage.getItem('Username')
+    let favorites = localStorage.getItem('FavoriteMovies')
+    this.fetchDataApi.getUser(user).subscribe((res:any) =>{
       this.user = res
-      this.getFavMovies();
+    })
+    console.log(user)
+  }
+
+
+  getMovies(): void {
+    this.fetchDataApi.getAllMovies().subscribe((resp: any) => {
+      this.movies = resp;
+      this.filterFavorites();
+      console.log(this.user);
     });
   }
 
+  
   /**
-   * gets your list of favorite movies from the backend
-   * @returns users favMovies list
+   * This method filters user's movies
+   * @returns favorite movies
    */
-   getFavMovies(): void {
-    this.fetchDataApi.getUser(localStorage.getItem('Username')).subscribe((resp: any) => {
-      this.favMovies = resp.favMovies;
-      return this.favMovies;
+  filterFavorites(): void {
+    this.movies.forEach((movie: any) => {
+      if (this.user.FavoriteMovies.includes(movie._id)) {
+        this.favMovies.push(movie);
+      }
     });
+    return this.favMovies;
   }
 
   /**
@@ -84,17 +96,15 @@ export class ProfilePageComponent implements OnInit {
       this.snackBar.open('Movie has been added to favorites', 'Nice', {
         duration: 2000,
       });
-      return this.getFavMovies();
     });
   }
 
   removeFav(id: string, Title: string): void {
     this.fetchDataApi.removeFav(id).subscribe((res: any) => {
-      this.snackBar.open('Movie has been removed from favorites`', 'Nice', {
+      this.snackBar.open('Movie has been removed from favorites', 'Nice', {
         duration: 2000,
       });
       window.location.reload();
-      return this.getFavMovies();
     });
   }
 
