@@ -193,14 +193,16 @@ private handleError(error: HttpErrorResponse): any {
    * @param username this refers to the account we wish to delete
    * @returns 
    */
-  deleteUser( Username: any): Observable<any> {
-    return this.http.delete(apiUrl + `users/` + Username , {
+  deleteUser(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const response = this.http.delete(apiUrl + `users/${user}`, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
         }
       )
-    }).pipe(
+    })
+    return response.pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     )

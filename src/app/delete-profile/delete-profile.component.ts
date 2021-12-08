@@ -22,7 +22,7 @@ user: any = localStorage.getItem('Username')
 
   deleteUser(): void {
     if (confirm('Are you sure ?')) {
-      this.fetchDataApi.deleteUser(this.user).subscribe(() => { localStorage.clear();
+      this.fetchDataApi.deleteUser().subscribe(() => { localStorage.clear();
         this.router.navigate(['welcome']);
         this.snackBar.open('Account has been deleted!', 'Nice', {
           duration: 2000
