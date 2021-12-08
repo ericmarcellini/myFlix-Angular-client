@@ -158,6 +158,7 @@ private handleError(error: HttpErrorResponse): any {
    * @returns 
    */
   public addFav(id: string): Observable<any> {
+    const token = localStorage.getItem('token')
     return this.http.post(apiUrl + `users/${user}/movies/${id}`, id, {
       headers: new HttpHeaders(
         {
@@ -176,6 +177,7 @@ private handleError(error: HttpErrorResponse): any {
    * @returns 
    */
    removeFav(id: string): Observable<any> {
+     const token = localStorage.getItem('token')
     return this.http.delete(apiUrl + `users/${user}/movies/${id}`, {
       headers: new HttpHeaders(
         {
